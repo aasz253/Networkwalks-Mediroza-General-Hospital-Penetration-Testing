@@ -1,0 +1,40 @@
+%% Rating model and priority mapping for engagement NW-B083.
+%% Two independent axes: technical severity, and remediation priority.
+
+flowchart LR
+    subgraph AXIS1["Axis 1 · Technical severity (CVSS v4.0)"]
+        S1["Critical<br/>SC:H with meaningful VI or VA"]
+        S2["High<br/>VC:H, or chained effect"]
+        S3["Medium<br/>bounded information disclosure"]
+        S4["Low"]
+    end
+
+    subgraph AXIS2["Axis 2 · Certainty"]
+        R1["Confirmed<br/>core rating inputs evidenced"]
+        R2["Provisional<br/>a metric input is inferred"]
+    end
+
+    subgraph AXIS3["Axis 3 · Verification state"]
+        V1["Documented<br/>reasoning only"]
+        V2["Evidence-attached<br/>sanitised artifact published"]
+        V3["Verified<br/>artifact reviewed and confirmed"]
+    end
+
+    subgraph AXIS4["Axis 4 · Remediation priority"]
+        P0["P0 · Same day<br/>live exposure or a chain root"]
+        P1["P1 · Days<br/>recurrence prevention"]
+        P2["P2 · Weeks<br/>defence in depth"]
+    end
+
+    S1 --> P0
+    S2 --> P0
+    S3 --> P1
+
+    R1 -.->|"does not change severity"| P0
+    R2 -.->|"may change severity if the<br/>inferred metric resolves either way"| S2
+
+    V1 -.->|"every finding in this engagement"| P0
+    V2 -.->|"promoted only with a<br/>reviewed artifact"| P1
+
+    classDef prov stroke-dasharray:5 5
+    class R2,V1 prov

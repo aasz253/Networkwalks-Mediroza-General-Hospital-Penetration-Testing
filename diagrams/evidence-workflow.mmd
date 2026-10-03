@@ -1,0 +1,23 @@
+%% Evidence lifecycle for engagement NW-B083.
+%% Shows why 22 observations exist while zero artifacts are published.
+
+flowchart TD
+    O["Observation recorded<br/>evidence/evidence-register.csv<br/>artifact_present = NO"]
+
+    O --> C["Artifact captured to a working location<br/>outside the repository"]
+    C --> P["Sanitised mechanically<br/>scripts/evidence_sanitizer.py"]
+    P --> M["Manual review<br/>meaning, not just identifiers"]
+    M --> R{"Does it pass review?"}
+    R -->|"No — client data present"| X["Do not publish.<br/>Retain a class-and-count description only"]
+    R -->|"Yes"| V{"Two-person review"}
+    V -->|"Pending"| H["Registered but unpublished<br/>artifact_present = NO"]
+    V -->|"Passed"| PUB["Publish under<br/>evidence/screenshots/&lt;MS&gt;/"]
+
+    H -.->|"Retest or second opinion"| M
+    O -.->|"Re-identification from prose"| W["Warning: an observation without<br/>an artifact is still a disclosure risk"]
+    W -.-> M
+
+    classDef warn stroke-dasharray:5 5
+    classDef stop stroke-width:3px
+    class X stop
+    class W warn

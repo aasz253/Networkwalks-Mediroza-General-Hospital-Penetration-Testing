@@ -1,0 +1,3 @@
+evidence_id,milestone,step,observation,supports_finding,expected_path,artifact_present,data_class,contains_pii,redaction_required,sanitization_status,reviewer
+NW-B083-M1-E01,M1,Step 1,Replace with a neutral observation; do not write a conclusion,n/a,evidence/screenshots/M1/NW-B083-M1-E01_slug.txt,NO,none,NO,none,not_started,UNASSIGNED
+NW-B083-M1-E02,M1,Step 1,n/a,evidence/screenshots/M1/NW-B083-M1-E02_slug.txt,NO,none,NO,none,not_started,UNASSIGNED

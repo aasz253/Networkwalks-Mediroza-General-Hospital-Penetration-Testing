@@ -1,0 +1,82 @@
+# =============================================================================
+# SYNTHETIC — NOT CLIENT DATA
+# =============================================================================
+# This file is fabricated for demonstrating scripts/evidence_sanitizer.py.
+# It contains NO real client data. Every value below is invented. The one real
+# string is an RFC 5737 documentation IP address (203.0.113.0/24), which is
+# reserved for documentation and routes nowhere.
+#
+# Purpose: show what the sanitiser removes, without processing real evidence.
+# =============================================================================
+
+$ SYNTHETIC EVIDENCE CAPTURE — NW-B083-DEMO-E01 (NOT A REGISTERED EVIDENCE ID)
+$ Illustrative request/response log. Values are fabricated.
+
+--- REQUEST ---------------------------------------------------------------
+GET /patient/login.php HTTP/1.1
+Host: medirozahospital.example
+User-Agent: Mozilla/5.0 (synthetic)
+Cookie: PHPSESSID=SYNTHETICSESSIONVALUE0001; path=/
+Accept: text/html
+
+--- RESPONSE --------------------------------------------------------------
+HTTP/1.1 200 OK
+Server: Apache/2.4.58 (synthetic)
+Set-Cookie: PHPSESSID=SYNTHETICSESSIONVALUE0002; HttpOnly
+Content-Type: text/html
+
+$ Login error observed for a non-existent username (synthetic wording):
+  "No account found with those details."
+$ Login error observed for an existing username (synthetic wording):
+  "Incorrect password. Please try again."
+
+--- SECOND REQUEST: SQL ERROR DEMONSTRATION (SYNTHETIC) --------------------
+POST /patient/login.php HTTP/1.1
+Host: medirozahospital.example
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer SYNTHETICBEARERTOKEN0123456789abcdef
+
+username=syntheticuser%27&password=NotARealPassword1
+
+--- RESPONSE --------------------------------------------------------------
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+Warning: mysqli_query(): You have an error in your SQL syntax; check the manual
+that corresponds to your MySQL server version for the right syntax to use near
+''' at line 1
+
+--- THIRD REQUEST: DOCUMENT KEY ATTEMPT (SYNTHETIC) -----------------------
+$ Command shown only to demonstrate that inline passwords are redacted.
+$ No real key, hash or credential appears in this repository.
+
+$ qpdf --password='SYNTHETIC-NOT-A-REAL-KEY' --decrypt report.pdf unlocked.pdf
+Password: SYNTHETIC-NOT-A-REAL-KEY
+$ exiftool unlocked.pdf
+Author                    : SYNTHETIC AUTHOR PLACEHOLDER
+Comments                 : SYNTHETIC COMMENT - no real internal note
+
+--- FOURTH REQUEST: LEGACY PATH (SYNTHETIC) -------------------------------
+$ curl -skI https://medirozahospital.example/old/
+HTTP/1.1 301 Moved Permanently
+Server: Apache/2.4.58 (synthetic)
+Location: https://medirozahospital.example:443/old/
+
+$ Directory listing follows in a real capture. This file deliberately omits any
+$ filename list, because reproducing one from the engagement is prohibited.
+
+--- SUPPORTING DETAILS (SYNTHETIC) ----------------------------------------
+$ Origin address recorded in the sample capture:
+  203.0.113.45        # RFC 5737 documentation range — not routable
+$ Contact address in the sample capture:
+  synthetic.author@example.invalid
+
+$ SYNTHETIC — NOT CLIENT DATA
+# Expected sanitiser output:
+#   Cookie / Set-Cookie / Authorization headers -> <REDACTED-...>
+#   Bearer token                               -> <REDACTED-TOKEN>
+#   --password / password arguments            -> <REDACTED-PASSWORD>
+#   E-mail address                             -> <REDACTED-EMAIL>
+#   IPv4 address                               -> <REDACTED-IP>
+# Expected to survive untouched:
+#   Finding IDs, evidence IDs, paths, SQL error wording, "SYNTHETIC" labels

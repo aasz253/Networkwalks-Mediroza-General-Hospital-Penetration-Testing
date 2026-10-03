@@ -6,8 +6,8 @@
 > the most likely to contain recoverable credentials. Treat every item as
 > 🔴 Confidential until reviewed.
 
-Policy and procedure: [`../../evidence/README.md`](../../evidence/README.md) ·
-Master register: [`../../evidence/evidence-register.csv`](../../evidence/evidence-register.csv)
+Policy and procedure: [`../../evidence/README.md`](../../../evidence/README.md) ·
+Master register: [`../../evidence/evidence-register.csv`](../../../evidence/evidence-register.csv)
 
 ---
 

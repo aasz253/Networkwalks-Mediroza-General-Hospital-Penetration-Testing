@@ -3,12 +3,12 @@
 **Batch B082 / B083 · Week 4 — Final Project**
 **Black-box web application security assessment of `https://medirozahospital.com`**
 
-[![Assessment](https://img.shields.io/badge/assessment-black--box%20web%20application-0A84FF?style=flat-square&logoColor=white)](https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest)
-[![Duration](https://img.shields.io/badge/duration-5%20business%20days-0A84FF?style=flat-square)](https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest)
-[![Milestones](https://img.shields.io/badge/milestones-4%2F4%20complete-0A84FF?style=flat-square)](https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest)
-[![Findings](https://img.shields.io/badge/findings-7%20documented-D22128?style=flat-square)](https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest)
-[![Critical](https://img.shields.io/badge/critical-3-D22128?style=flat-square)](https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest)
-[![Evidence](https://img.shields.io/badge/evidence%20artifacts-PENDING%20SANITIZATION-D22128?style=flat-square)](https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest)
+[![Assessment](https://img.shields.io/badge/assessment-black--box%20web%20application-0A84FF?style=flat-square&logoColor=white)](https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing)
+[![Duration](https://img.shields.io/badge/duration-5%20business%20days-0A84FF?style=flat-square)](https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing)
+[![Milestones](https://img.shields.io/badge/milestones-4%2F4%20complete-0A84FF?style=flat-square)](https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing)
+[![Findings](https://img.shields.io/badge/findings-7%20documented-D22128?style=flat-square)](https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing)
+[![Critical](https://img.shields.io/badge/critical-3-D22128?style=flat-square)](https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing)
+[![Evidence](https://img.shields.io/badge/evidence%20artifacts-PENDING%20SANITIZATION-D22128?style=flat-square)](https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing)
 [![License](https://img.shields.io/badge/license-see%20LICENSE-white?style=flat-square)](./LICENSE)
 
 ---
@@ -135,8 +135,8 @@ activity rather than a phase.
 | 3 | [Patient documents accessible after login bypass](./findings/verified-findings/NW-B083-M1-F03-document-access-control.md) | `/patient/reports/` | 🔴 High | `AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:L/VA:N/SC:N/SI:N/SA:N` | Documented |
 | 4 | [Weak PDF passwords recoverable from wordlists](./findings/verified-findings/NW-B083-M2-F01-weak-document-passwords.md) | `LAB-PDF-01…03` | 🔴 High | `AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N` | Documented |
 | 5 | [Sensitive metadata retained in patient PDF](./findings/verified-findings/NW-B083-M3-F01-sensitive-pdf-metadata.md) | `LAB-PDF-03` | 🟠 Medium | `AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N` | Documented |
-| 6 | [Legacy folder with directory listing enabled](./findings/verified-findings/NW-B083-M3-F02-directory-listing-legacy-folder.md) | `/old/` | 🔴 Critical | `AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:H/VA:L/SC:H/SI:N/SA:N` | Documented |
-| 7 | [Staff salaries and shareholder data in cleartext backup](./findings/verified-findings/NW-B083-M3-F03-cleartext-database-backup-exposure.md) | `/old/mediroza_db_backup_2019.sql` | 🔴 Critical | `AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:H/SI:N/SA:N` | Documented |
+| 6 | [Directory listing enabled on a legacy web root](./findings/verified-findings/NW-B083-M3-F02-directory-listing-legacy-folder.md) | `/old/` | 🔴 Critical | `AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N` | Documented |
+| 7 | [Unencrypted database backup exposed in a legacy web root](./findings/verified-findings/NW-B083-M3-F03-cleartext-database-backup-exposure.md) | `/old/` (backup file) | 🔴 Critical | `AV:N/AC:L/AT:N/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N` | Documented |
 
 **Severity distribution:** 🔴 Critical 3 · 🔴 High 2 · 🟠 Medium 2 · 🟢 Low 0
 
@@ -250,7 +250,7 @@ Every artefact uses the ID scheme `NW-B083-<MS>-E<nn>` and is tracked in
 
 ```mermaid
 flowchart TB
-    ROOT["networkwalks-b083-mediroza-pentest"]
+    ROOT["Networkwalks-Mediroza-General-Hospital-Penetration-Testing"]
     ROOT --> DOCS["docs/ · engagement governance"]
     ROOT --> MS["milestones/ · M1 M2 M3 M4"]
     ROOT --> FND["findings/ · 7 finding records"]
@@ -386,8 +386,8 @@ tooling practice.
 ## 13. Quick start
 
 ```bash
-git clone https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest.git
-cd networkwalks-b083-mediroza-pentest
+git clone https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing.git
+cd Networkwalks-Mediroza-General-Hospital-Penetration-Testing
 
 # Documentation QA: links, CSV structure, evidence refs, secret patterns, CVSS vectors
 python3 scripts/repo_checks.py

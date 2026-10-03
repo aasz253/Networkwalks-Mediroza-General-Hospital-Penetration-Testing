@@ -1,0 +1,40 @@
+action_id,priority,title,addresses_findings,effort,retest_criteria,owner,target_date,status,verified
+R-01,P0,Remove the database backup from the web root and purge CDN and proxy caches,NW-B083-M3-F03,Minutes,T-01 former URL returns 404; T-03 no cached copy present,UNASSIGNED,UNASSIGNED,Not started,NO
+R-02,P0,Search every web-served path for dumps backups archives and large binaries,NW-B083-M3-F03,Hours,T-02 filesystem search returns zero matches,UNASSIGNED,UNASSIGNED,Not started,NO
+R-03,P0,Assess breach-notification obligations and treat all data in the file as compromised,NW-B083-M3-F03,Days,Notification decision recorded by the accountable owner,UNASSIGNED,UNASSIGNED,Not started,NO
+R-04,P0,Review access logs for retrieval of the exposed file by third parties,NW-B083-M3-F03,Hours,Log review completed and documented,UNASSIGNED,UNASSIGNED,Not started,NO
+R-05,P0,Decommission the legacy path and delete its contents from the filesystem,NW-B083-M3-F02;NW-B083-M3-F03,Hours,T-04 legacy path returns 404 and contents removed,UNASSIGNED,UNASSIGNED,Not started,NO
+R-06,P0,Disable directory indexing globally with Options -Indexes,NW-B083-M3-F02,Minutes,T-05 no index rendered at any path,UNASSIGNED,UNASSIGNED,Not started,NO
+R-07,P0,Parameterise every query and verify passwords with password_verify,NW-B083-M1-F02,Days,T-07; T-08; T-10,UNASSIGNED,UNASSIGNED,Not started,NO
+R-08,P0,Disable verbose database errors in production,NW-B083-M1-F02,Minutes,T-09 no driver name or SQL fragment returned,UNASSIGNED,UNASSIGNED,Not started,NO
+R-09,P0,Move documents outside the web root and serve through an authorising endpoint with per-object checks,NW-B083-M1-F03;NW-B083-M2-F01,Days,T-11; T-12; T-13,UNASSIGNED,UNASSIGNED,Not started,NO
+R-10,P0,Rotate any credentials present in the exposed backup,NW-B083-M3-F03,Hours,T-15 all credentials from the dump rejected,UNASSIGNED,UNASSIGNED,Not started,NO
+R-11,P1,Alert on bulk and unusual document downloads,NW-B083-M1-F03;NW-B083-M3-F03 detection,Days,T-16 alert raised and triaged,UNASSIGNED,UNASSIGNED,Not started,NO
+R-12,P1,Alert on authentication errors and enumeration patterns,NW-B083-M1-F01;NW-B083-M1-F02 detection,Days,T-17 alert raised and triaged,UNASSIGNED,UNASSIGNED,Not started,NO
+R-13,P1,Alert on 200 or 301 responses from retired paths,NW-B083-M3-F02 detection,Days,T-18 alert raised and triaged,UNASSIGNED,UNASSIGNED,Not started,NO
+R-14,P1,Store backups off-web-root encrypted with KMS keys separated from the host,NW-B083-M3-F03 recurrence,Days,T-14 restore impossible without the KMS key,UNASSIGNED,UNASSIGNED,Not started,NO
+R-15,P1,Enforce backup retention with automatic expiry,NW-B083-M3-F03 recurrence,Days,Retention configuration verified and no indefinite-retention notes remain,UNASSIGNED,UNASSIGNED,Not started,NO
+R-16,P1,Log and review document access with user document and timestamp,Auditability,Days,Access log entry observed for an authorised download,UNASSIGNED,UNASSIGNED,Not started,NO
+R-17,P1,Add a CI gate failing on sql bak dump and archive files under web roots,NW-B083-M3-F03 recurrence,Days,T-19 build fails on a test backup file,UNASSIGNED,UNASSIGNED,Not started,NO
+R-18,P1,Move backup authoring to infrastructure where a web root is impossible,NW-B083-M3-F03 root cause,Weeks,Backup destination verified outside every document root,UNASSIGNED,UNASSIGNED,Not started,NO
+R-19,P1,Generate document passwords with a CSPRNG of at least 20 characters unique per document,NW-B083-M2-F01,Days,T-20 no key recovered by wordlist or mutation pass,UNASSIGNED,UNASSIGNED,Not started,NO
+R-20,P1,Store document keys in a secrets manager and transmit them out of band,NW-B083-M2-F01,Days,Key custody confirmed by review,UNASSIGNED,UNASSIGNED,Not started,NO
+R-21,P1,Require decommissioning sign-off as a deployment step after migration,NW-B083-M3-F02;NW-B083-M3-F03 systemic cause,Weeks,Process documentation shows the step as auditable,UNASSIGNED,UNASSIGNED,Not started,NO
+R-22,P1,Review robots.txt and remove retired and sensitive paths,Reconnaissance cost reduction,Minutes,Disclosure file contains no retired path,UNASSIGNED,UNASSIGNED,Not started,NO
+R-23,P2,Return one generic message for every failed login,NW-B083-M1-F01,Hours,T-22 byte-identical response body and status,UNASSIGNED,UNASSIGNED,Not started,NO
+R-24,P2,Strip document metadata automatically on export and verify the output,NW-B083-M3-F01,Days,T-21 verification command returns no metadata field,UNASSIGNED,UNASSIGNED,Not started,NO
+R-25,P2,Configure the document generator to omit metadata at source,NW-B083-M3-F01,Days,T-21 metadata absent without manual stripping,UNASSIGNED,UNASSIGNED,Not started,NO
+R-26,P2,Introduce SAST in CI detecting concatenation into query APIs,NW-B083-M1-F02 recurrence,Weeks,T-23 SAST fails the build,UNASSIGNED,UNASSIGNED,Not started,NO
+R-27,P2,Allow-list any value used to build dynamic SQL,NW-B083-M1-F02,Days,Code review confirms no identifier is concatenated,UNASSIGNED,UNASSIGNED,Not started,NO
+R-28,P2,Audit sibling parameters and entry points for injection,NW-B083-M1-F02 scope,Weeks,All identified parameters tested with no structured error,UNASSIGNED,UNASSIGNED,Not started,NO
+R-29,P2,Apply rate limiting to authentication,Brute-force resistance,Days,Threshold enforced and observed,UNASSIGNED,UNASSIGNED,Not started,NO
+R-30,P2,Apply an allow-list to the document root and deny everything else,NW-B083-M1-F03;NW-B083-M3-F02,Days,T-06 access outside intended paths denied,UNASSIGNED,UNASSIGNED,Not started,NO
+R-31,P2,Reduce server version disclosure with ServerTokens Prod and ServerSignature Off,Hardening,Minutes,T-24 no version token present,UNASSIGNED,UNASSIGNED,Not started,NO
+R-32,P2,Review all document types for metadata not only PDF,NW-B083-M3-F01,Days,Metadata absent from every issued format,UNASSIGNED,UNASSIGNED,Not started,NO
+R-33,P3,Implement periodic external exposure monitoring for stray artefacts,NW-B083-M3-F03 recurrence,Ongoing,T-27 a stray artefact is detected,UNASSIGNED,UNASSIGNED,Not started,NO
+R-34,P3,Maintain an inventory of intended public paths,NW-B083-M3-F02 recurrence,Weeks,Inventory exists and is reviewed,UNASSIGNED,UNASSIGNED,Not started,NO
+R-35,P3,Segregate clinical payroll and governance data into separate stores,Blast-radius reduction,Months,T-26 governance and payroll data not co-located with clinical data,UNASSIGNED,UNASSIGNED,Not started,NO
+R-36,P3,Run a data-minimisation and retention review across all data classes,Blast-radius reduction,Months,Retention policy documented and enforced,UNASSIGNED,UNASSIGNED,Not started,NO
+R-37,P3,Sign documents where authenticity matters,Tamper detection,Weeks,T-28 a modified signed document fails verification,UNASSIGNED,UNASSIGNED,Not started,NO
+R-38,P3,Retest all criteria on a scheduled basis,All,Ongoing,T-25 full retest passes,UNASSIGNED,UNASSIGNED,Not started,NO
+R-39,P3,Formalise evidence handling and sanitization review,Report quality,Weeks,Two-person review process documented and in use,UNASSIGNED,UNASSIGNED,Not started,NO

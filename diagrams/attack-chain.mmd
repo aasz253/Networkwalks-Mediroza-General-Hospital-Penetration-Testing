@@ -1,0 +1,50 @@
+%% Global attack chain for engagement NW-B083.
+%% High level only: no payloads, no hostnames, no versions, no recovered values.
+%% Severity labels describe the weakness in isolation, not its position in this chain.
+
+flowchart TD
+    subgraph M1["M1 · Initial access"]
+        A1["F01 · Username enumeration<br/>Medium · Confirmed"]
+        A2["F02 · Unauthenticated report download<br/>Critical · Confirmed"]
+        A3["F03 · Direct object reference<br/>High · Provisional"]
+    end
+
+    subgraph M2["M2 · Data extraction"]
+        B1["F01 · Weak document passwords<br/>High · Provisional"]
+        B2["Attacker already has three password-protected PDFs<br/>from M1-F02 — no access control bypass required"]
+    end
+
+    subgraph M3["M3 · Critical data exposure"]
+        C1["F01 · PDF metadata disclosure<br/>Medium · Confirmed"]
+        C2["F02 · Directory listing<br/>Critical · Provisional"]
+        C3["F03 · Cleartext database backup<br/>Critical · Confirmed"]
+    end
+
+    subgraph IMPL["Compound effect"]
+        D1["F02 exposes the documents that<br/>M2-F01 makes recoverable"]
+        D2["M3-F03 exposes a backup of the<br/>store behind the portal"]
+        D3["M3-F01 and M3-F02 lower the cost<br/>of locating what M3-F03 exposes"]
+        D4["No single finding produced full<br/>database content — impact was capped<br/>by incomplete enumeration, not by control"]
+    end
+
+    A2 --> B2 --> B1
+    B1 --> C1
+    C1 --> C3
+    C2 --> C3
+    A1 -.->|"reduces the cost of locating<br/>accounts and documents"| B2
+    A3 -.->|"document disclosure is<br/>preconditioned on guessing an ID"| B2
+
+    D1 --> IMPL
+    D2 --> IMPL
+    D3 --> IMPL
+
+    classDef critical stroke-width:3px
+    classDef high stroke-width:2px
+    classDef medium stroke-width:1px
+    classDef provisional stroke-dasharray:5 5
+
+    class A2,C2,C3 critical
+    class A3,B1 high
+    class A1,C1 medium
+
+    class A3,B1,C2 provisional

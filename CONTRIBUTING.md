@@ -42,8 +42,8 @@ for merge.
 ## 3. Workflow
 
 ```bash
-git clone https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest.git
-cd networkwalks-b083-mediroza-pentest
+git clone https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing.git
+cd Networkwalks-Mediroza-General-Hospital-Penetration-Testing
 
 git switch -c docs/short-descriptive-change
 

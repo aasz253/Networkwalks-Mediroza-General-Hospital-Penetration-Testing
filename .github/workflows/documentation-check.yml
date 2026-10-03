@@ -1,0 +1,66 @@
+name: Documentation quality gate
+
+# Offline documentation QA for engagement NW-B083.
+#
+# Verifies internal consistency only: links, CSV structure, ID references, CVSS
+# vector agreement, secret patterns and stated counts. These checks cannot and do
+# not verify that any recorded observation occurred.
+#
+# No dependency installation and no network access beyond the runner's own
+# checkout of this repository.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  documentation-checks:
+    name: Links, registers, IDs and vectors
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Report interpreter version
+        run: python3 --version
+
+      - name: Self-test the evidence sanitiser
+        run: python3 scripts/evidence_sanitizer.py --self-test
+
+      - name: Run documentation consistency checks
+        run: python3 scripts/repo_checks.py --verbose
+
+      - name: Byte-compile every Python file
+        run: python3 -m compileall -q scripts
+
+      - name: Confirm no oversized tracked files
+        # A sanitized artifact over 512 KB would defeat manual review, and any
+        # binary at all could embed unredacted text.
+        run: |
+          set -eu
+          oversized="$(git ls-files -z \
+            | xargs -0 -r stat -c '%s %n' \
+            | awk '$1 > 524288 {print "  " $0}')"
+          if [ -n "$oversized" ]; then
+            echo "Tracked files over 512 KB:" >&2
+            echo "$oversized" >&2
+            exit 1
+          fi
+          echo "No tracked file exceeds 512 KB."

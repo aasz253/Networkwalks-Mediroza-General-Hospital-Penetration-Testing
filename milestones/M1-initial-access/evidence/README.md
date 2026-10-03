@@ -2,8 +2,8 @@
 
 **Milestone:** Initial Access · **Registered observations:** 8 · **Artifacts attached:** 0
 
-Policy and procedure: [`../../evidence/README.md`](../../evidence/README.md) ·
-Master register: [`../../evidence/evidence-register.csv`](../../evidence/evidence-register.csv)
+Policy and procedure: [`../../evidence/README.md`](../../../evidence/README.md) ·
+Master register: [`../../evidence/evidence-register.csv`](../../../evidence/evidence-register.csv)
 
 ---
 
@@ -75,7 +75,7 @@ this section deliberately contains placeholders rather than broken links.
 | # | Task | Status |
 | --- | --- | --- |
 | 1 | Capture the 8 M1 artifacts into the off-repository raw store | ❌ Not done |
-| 2 | Sanitise using [`../../scripts/evidence_sanitizer.py`](../../scripts/README.md) for text captures | ❌ Not done |
+| 2 | Sanitise using [`../../scripts/evidence_sanitizer.py`](../../../scripts/README.md) for text captures | ❌ Not done |
 | 3 | Manually review and redact per §4 | ❌ Not done |
 | 4 | Place reviewed artifacts in `evidence/screenshots/M1/` | ❌ Not done |
 | 5 | Update `artifact_present` to `YES` and `redaction_status` in the register | ❌ Not done |
@@ -84,4 +84,4 @@ this section deliberately contains placeholders rather than broken links.
 
 Until items 1–5 are complete, M1 findings remain at status **Documented** rather
 than **Evidence-attached**. That distinction is maintained in
-[`../../findings/README.md`](../../findings/README.md) and is deliberate.
+[`../../findings/README.md`](../../../findings/README.md) and is deliberate.

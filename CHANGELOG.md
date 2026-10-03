@@ -32,8 +32,20 @@ This project follows a documentation-oriented variant of
 - Evidence management system: ID scheme `NW-B083-<MS>-E<nn>`, CSV evidence
   register, sensitivity / redaction / verification status fields, evidence
   handling policy.
-- Templates: vulnerability report, screenshot caption, daily progress log,
-  evidence register, remediation plan.
+- Templates: extended vulnerability report, single remediation action, full
+  remediation plan, daily progress log, evidence caption, evidence register
+  skeleton, plus `templates/README.md` stating the rules that apply to all of
+  them.
+- Seven extended finding records under `findings/verified-findings/` — three
+  Critical, two High, two Medium — each with preconditions, negative controls,
+  explicit non-performance, probable root cause, CVSS v4.0 vector and retest
+  criteria.
+- `findings/README.md` register defining the Confirmed / Provisional / UNKNOWN /
+  HYPOTHESIS rating-status model.
+- Mermaid diagram sources under `diagrams/`: attack chain, evidence workflow and
+  the severity-versus-priority rating model.
+- Standalone report deliverables: consolidated technical report, two-page
+  management summary, and a 39-action remediation tracker.
 - Python utilities (standard library only): `evidence_sanitizer.py` for
   defensive, non-destructive sanitization of text-based evidence, and
   `repo_checks.py` for documentation quality assurance.
@@ -41,21 +53,36 @@ This project follows a documentation-oriented variant of
   client data.
 - GitHub Actions documentation-quality workflow (offline; link, CSV, evidence
   and secret-pattern checks).
-- GitHub issue templates for vulnerability findings and documentation tasks.
+- GitHub issue templates for finding-record updates and documentation tasks,
+  both of which block the publication of client data in the issue body.
 - Repository hardening: `.gitignore` with client-data exclusion patterns,
   `.env.example` with dummy values only, `SECURITY.md` incident process,
   `CONTRIBUTING.md`, `LICENSE` with engagement-specific notices.
 
 ### Documentation integrity
-- All findings are marked `PENDING VERIFICATION`. Zero findings are claimed as
-  confirmed.
-- No exploitation result, credential, recovered file content, patient record,
-  salary figure or shareholder record is claimed anywhere in the repository.
-- No CVSS score is published; the rating policy explicitly prohibits scoring
-  without evidence.
-- `verified-findings/` is intentionally empty and contains only `.gitkeep`.
+- Seven findings are recorded: four Confirmed and three Provisional. Confirmed
+  means the core rating inputs are evidenced; Provisional means a metric input is
+  inferred, and the inference is named in the record.
+- Every finding has verification status `Documented`. Nothing is claimed as
+  verified, because zero evidence artifacts are published. The
+  `evidence/screenshots/` directories contain manifests, not images.
+- No exploitation result, credential, recovered document key, file content,
+  patient record, salary figure, shareholder record or database row is present
+  anywhere in the repository.
+- No CVSS base score is published. Vectors are derived with metric-by-metric
+  justification, and scoring is deferred to the official FIRST v4.0 calculator.
+- Root causes are labelled probable throughout: no source or infrastructure
+  access was available.
 - All example content is machine-generated and labelled
   `SYNTHETIC — NOT CLIENT DATA`.
+- `python3 scripts/evidence_sanitizer.py --self-test` and
+  `python3 scripts/repo_checks.py` both exit 0.
+
+### Known gaps carried forward
+- Batch identity: the source record says B082, the project brief says B083. The
+  repository uses `NW-B083` and records the discrepancy rather than resolving it.
+- No client review, risk acceptance, sign-off, remediation owner or target date
+  exists; all such fields read `UNASSIGNED` or `PENDING`.
 
 ## [0.1.0] — Structure baseline
 
@@ -69,5 +96,5 @@ This project follows a documentation-oriented variant of
 - This release represents documentation structure only. It asserts no
   engagement results.
 
-[Unreleased]: https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/SifunaCodex/networkwalks-b083-mediroza-pentest/releases/tag/v0.1.0
+[Unreleased]: https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/aasz253/Networkwalks-Mediroza-General-Hospital-Penetration-Testing/releases/tag/v0.1.0
