@@ -1,0 +1,186 @@
+# ---------------------------------------------------------------------------
+# Networkwalks B083 — Mediroza General Hospital Penetration Testing
+# Repository hygiene, client-data protection and secret-exclusion rules.
+#
+# POLICY SUMMARY
+#   This repository is PUBLIC. It must never contain client-sensitive data.
+#   Unredacted evidence is stored OFF-REPOSITORY in an access-controlled store.
+#   If you are unsure whether a file belongs here: it does not.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# 1. Credentials, keys and tokens — NEVER COMMIT
+# ---------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.asc
+*.gpg
+*.ppk
+id_rsa*
+id_ed25519*
+id_ecdsa*
+id_dsa*
+.netrc
+.pgpass
+.my.cnf
+.aws/
+.azure/
+.gcloud/
+.kube/
+kubeconfig
+*.kubeconfig
+
+# Cloud / CI provider credentials
+*.tfvars
+*.tfvars.json
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
+
+# Session material captured during testing
+cookies.txt
+*cookies*.txt
+*cookies*.json
+*session*.json
+*session*.txt
+burp*.xml
+*.har
+zap-session*
+
+# ---------------------------------------------------------------------------
+# 2. Raw and unredacted client evidence — NEVER COMMIT
+# ---------------------------------------------------------------------------
+# Screenshots and captures are committed ONLY after manual review and redaction.
+*_RAW.*
+*_UNREDACTED.*
+*_ORIGINAL.*
+raw-evidence/
+unsanitized/
+originals/
+capture/
+captures/
+*_sensitive.*
+*nda*
+
+# Real client documents (patient records, payroll, shareholder material)
+*.pdf
+*.doc
+*.docx
+*.xls
+*.xlsx
+*.ppt
+*.pptx
+!docs/**/*.md
+medical/
+patient/
+patients/
+clinical/
+records/
+payroll/
+salary/
+salaries/
+shareholder/
+shareholders/
+hr-export*
+
+# Database / dump exports
+*.sql
+*.dump
+*.bak
+*.mdb
+*.accdb
+*.sqlite
+*.sqlite3
+*.db
+
+# ---------------------------------------------------------------------------
+# 3. Scanned and reconnaissance output — NEVER COMMIT
+# ---------------------------------------------------------------------------
+nmap*.xml
+nmap*.nmap
+nmap*.txt
+nikto*
+dirbuster*/
+gobuster*/
+ffuf*/
+feroxbuster*/
+wfuzz*
+sqlmap*
+nikto/
+ amass*.json
+subfinder*.txt
+masscan*
+zgrab*
+tlsscan*
+responder*.log
+hashcat*
+john/
+hydra*
+cewl*
+
+# ---------------------------------------------------------------------------
+# 4. Tool state, caches and interpreter artefacts
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+*.log
+
+# Editor / OS noise
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# ---------------------------------------------------------------------------
+# 5. Repository QA output
+# ---------------------------------------------------------------------------
+nw-sanitizer-out/
+sanitized-out/
+*sanitizer-report.json
+repo-check-report.json
+.tmp/
+
+# ---------------------------------------------------------------------------
+# 6. Templates and generated artefacts that must be regenerated, not hand-edited
+# ---------------------------------------------------------------------------
+# (Intentionally NOT ignored: templates/ is committed so contributors can use them.)
+
+# ---------------------------------------------------------------------------
+# 7. Allow-list for evidence placeholders
+# ---------------------------------------------------------------------------
+# NOTE: This repository intentionally contains NO binary evidence files.
+# Placeholder directories are preserved via .gitkeep files, which are
+# explicitly NOT ignored. Once sanitized evidence is approved for
+# publication, add the extension to the allow-list section of
+# evidence/README.md rather than weakening the rules above.
+!.gitkeep
